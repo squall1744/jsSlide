@@ -10,27 +10,7 @@ cloneChild()
 
 autoPlay()
 
-next.addEventListener('click', e => {
-  nextImg()
-})
-
-prev.addEventListener('click', e => {
-  prevImg()
-})
-
-wrapper.addEventListener('transitionend', e=> {
-  animationing = false
-  seamless()
-})
-
-container.addEventListener('mouseenter', e => {
-  focused = true
-})
-
-container.addEventListener('mouseleave', e => {
-  focused = false
-  autoPlay()
-})
+bindEvent()
 
 function cloneChild() {
   let fisrtChild = wrapper.firstElementChild.cloneNode()
@@ -63,13 +43,13 @@ function prevImg() {
 
 function seamless() {
   if(index > 4) {
-      wrapper.style.transition = 'all 0s'
-      wrapper.style.left = `-400px`
-      index = 0
+    wrapper.style.transition = 'all 0s'
+    wrapper.style.left = '-400px'
+    index = 0
   }else if(index < 0) {
-      wrapper.style.transition = 'all 0s'
-      wrapper.style.left = `-2000px`
-      index = 4    
+    wrapper.style.transition = 'all 0s'
+    wrapper.style.left = '-2000px'
+    index = 4    
   }
 }
 
@@ -80,4 +60,29 @@ function autoPlay() {
       id = setTimeout(fn, 1000)
     }
   }, 1000)  
+}
+
+
+function bindEvent() {
+  next.addEventListener('click', e => {
+    nextImg()
+  })
+
+  prev.addEventListener('click', e => {
+    prevImg()
+  })
+
+  wrapper.addEventListener('transitionend', e=> {
+    animationing = false
+    seamless()
+  })
+
+  container.addEventListener('mouseenter', e => {
+    focused = true
+  })
+
+  container.addEventListener('mouseleave', e => {
+    focused = false
+    autoPlay()
+  })
 }
